@@ -1,0 +1,58 @@
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+
+IoT
+    An Internet of Things (IoT) gateway is a critical component in IoT systems that acts as an intermediary between IoT devices (sensors, actuators, and other smart devices) and the central cloud-based platform or local network. Its primary function is to facilitate communication, data processing, and management between the edge devices and the cloud or central system.
+
+EC2
+    Amazon Elastic Compute Cloud (Amazon EC2) is a web service provided by Amazon Web Services (AWS) that offers resizable computing capacity in the cloud. An AWS EC2 instance is a virtual server in the cloud that allows users to rent computing resources to run applications and services.
+
+MQTT
+    MQTT is a standards-based messaging protocol, or set of rules, used for machine-to-machine communication. Smart sensors, wearables, and other Internet of Things (IoT) devices typically have to transmit and receive data over a resource-constrained network with limited bandwidth. These IoT devices use MQTT for data transmission, as it is easy to implement and can communicate IoT data efficiently. MQTT supports messaging between devices to the cloud and the cloud to the device.
+
+    Lightweight and efficient
+        MQTT implementation on the IoT device requires minimal resources, so it can even be used on small microcontrollers. For example, a minimal MQTT control message can be as little as two data bytes. MQTT message headers are also small so that you can optimize network bandwidth.
+
+    Scalable
+        MQTT implementation requires a minimal amount of code that consumes very little power in operations. The protocol also has built-in features to support communication with a large number of IoT devices. Hence, you can implement the MQTT protocol to connect with millions of these devices.
+
+    Reliable
+        Many IoT devices connect over unreliable cellular networks with low bandwidth and high latency. MQTT has built-in features that reduce the time the IoT device takes to reconnect with the cloud. It also defines three different quality-of-service levels to ensure reliability for IoT use cases— at most once (0), at least once (1), and exactly once (2).
+
+    Secure
+        MQTT makes it easy for developers to encrypt messages and authenticate devices and users using modern authentication protocols, such as OAuth, TLS1.3, Customer Managed Certificates, and more.
+
+    Well-supported
+        Several languages like Python have extensive support for MQTT protocol implementation. Hence, developers can quickly implement it with minimal coding in any type of application.
+
+Pub Sub model
+    The MQTT protocol works on the principles of the publish/subscribe model. In traditional network communication, clients and servers communicate with each other directly. The clients request resources or data from the server, then the server processes and sends back a response. However, MQTT uses a publish/subscribe pattern to decouple the message sender (publisher) from the message receiver (subscriber). Instead, a third component, called a message broker, handles the communication between publishers and subscribers. The broker’s job is to filter all incoming messages from publishers and distribute them correctly to subscribers. The broker decouples the publishers and subscribers as below:
+
+    Space decoupling
+        The publisher and subscriber are not aware of each other’s network location and do not exchange information such as IP addresses or port numbers.
+
+    Time decoupling
+        The publisher and subscriber don’t run or have network connectivity at the same time.
+
+    Synchronization decoupling
+        Both publishers and subscribers can send or receive messages without interrupting each other. For example, the subscriber does not have to wait for the publisher to send a message.
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+
+26th July 2023: Create the Pub-Sub code. It retrives simulated data, and uploads it to the cloud.
+Create AWS account, use credit card. Everything is free for one year.
+create ec2 instance, and use Influx DB 2.0
+
+ssh -i "path to keypair" ec2-user@ec2-15-184-201-178.me-south-1.compute.amazonaws.com
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+
+11th August 2023: Automate the data upload, export the dashboard in JSON format.
+
+1. Install the python interpreter
+2. Install python modules
+3. Create a directory to store the source code, and import the source codes using:
+    scp -i "path to keypair" "path to python file" ec2-user@ec2-15-184-201-178.me-south-1.compute.amazonaws.com:"directory in ec2"
+4. go to the home directory, create a shell script, and create the executable for it.
+5. Install cronie.
+6. Start the crond service, and enable it to boot at startup.
+7. Create the cron job, and save it:
+    0 3 * * * /home/ec2-user/my_scripts/run_my_scripts.sh
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __

@@ -1,0 +1,707 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#a155ff",
+            "mode": "fixed",
+            "seriesBy": "max"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"${sensor_type}\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Graph",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 60,
+          "min": 20,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 31
+              },
+              {
+                "color": "red",
+                "value": 38
+              },
+              {
+                "color": "purple",
+                "value": 48
+              },
+              {
+                "color": "#000000",
+                "value": 53
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"heat_index\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Heat Index",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 10,
+      "options": {
+        "calculate": false,
+        "cellGap": 0,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Inferno",
+          "steps": 128
+        },
+        "exemplars": {
+          "color": "purple"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": false
+        },
+        "rowsFrame": {
+          "layout": "ge"
+        },
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "hidden",
+          "reverse": false
+        }
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"temperature\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Temperature heatmap",
+      "transparent": true,
+      "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 11,
+      "options": {
+        "calculate": false,
+        "cellGap": 0,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": true,
+          "scale": "exponential",
+          "scheme": "Blues",
+          "steps": 128
+        },
+        "exemplars": {
+          "color": "purple"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": false
+        },
+        "rowsFrame": {
+          "layout": "ge"
+        },
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "hidden",
+          "reverse": false
+        }
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"humidity\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Humidity heatmap",
+      "transparent": true,
+      "type": "heatmap"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 14
+      },
+      "id": 3,
+      "libraryPanel": {
+        "name": "Current temperature",
+        "uid": "f63b3a83-e56f-49a2-a6dc-49ba19a630f8"
+      },
+      "title": "Current temperature"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 14
+      },
+      "id": 5,
+      "libraryPanel": {
+        "name": "Current Humidity",
+        "uid": "d7b41548-e98b-4233-90d7-251486bef0d0"
+      },
+      "title": "Current Humidity"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "mappings": [],
+          "max": 45,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 14
+      },
+      "id": 7,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"temperature\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Maximum temperature",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "mappings": [],
+          "max": 45,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 14
+      },
+      "id": 8,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "min"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"temperature\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Minimum temperature",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-YlBl"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "humidity"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 14
+      },
+      "id": 6,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"humidity\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Maximum Humidity",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-YlBl"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "humidity"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 14
+      },
+      "id": 9,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "min"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d6ea24fb-77cd-45d4-a57f-6ba1085ada94"
+          },
+          "query": "from(bucket: \"IoT_bucket\")\r\n  |> range(start: time(v: ${start_time}), stop: time(v: ${end_time}))\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"environment_data\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"humidity\")\r\n  |> filter(fn: (r) => r[\"location\"] == \"Testing\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Minimum Humidity",
+      "transparent": true,
+      "type": "gauge"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "temperature",
+          "value": "temperature"
+        },
+        "description": "Select the type of sensor to be used",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Sensor Type",
+        "multi": false,
+        "name": "sensor_type",
+        "options": [
+          {
+            "selected": true,
+            "text": "temperature",
+            "value": "temperature"
+          },
+          {
+            "selected": false,
+            "text": "humidity",
+            "value": "humidity"
+          }
+        ],
+        "query": "temperature, humidity",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "2023-08-12T00:00:00Z",
+          "value": "2023-08-12T00:00:00Z"
+        },
+        "description": "Use this format while entering this value:\n2023-08-07T00:00:00Z",
+        "hide": 0,
+        "label": "Start Time",
+        "name": "start_time",
+        "options": [
+          {
+            "selected": true,
+            "text": "2023-08-12T00:00:00Z",
+            "value": "2023-08-12T00:00:00Z"
+          }
+        ],
+        "query": "2023-08-12T00:00:00Z",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "2023-08-12T23:59:59Z",
+          "value": "2023-08-12T23:59:59Z"
+        },
+        "description": "Use this format while entering this value:\n2023-08-07T23:59:59Z",
+        "hide": 0,
+        "label": "End time",
+        "name": "end_time",
+        "options": [
+          {
+            "selected": true,
+            "text": "2023-08-12T23:59:59Z",
+            "value": "2023-08-12T23:59:59Z"
+          }
+        ],
+        "query": "2023-08-12T23:59:59Z",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Temperature-humidity",
+  "uid": "ec6eb386-0359-469d-aa25-96f96a08ea08",
+  "version": 22,
+  "weekStart": ""
+}
