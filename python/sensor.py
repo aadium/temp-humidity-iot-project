@@ -12,6 +12,7 @@ def calculate_heat_index(temperature, humidity):
     heat_index = ((-42.379) + 2.04901523*T + 10.14333127*RH - 0.22475541*T*RH - 0.00683783*T*T - 0.05481717*RH*RH + 0.00122874*T*T*RH + 0.00085282*T*RH*RH - 0.00000199*T*T*RH*RH)
     heat_index = (heat_index - 32) * (5/9)
 
+    # Does not allow heat index to drop lower than the temperature
     if heat_index < temperature:
         return temperature
     else:
@@ -69,40 +70,14 @@ def simulate_sensor_data(num_samples, initial_temp, temp_variance, initial_humid
 
     return timestamp_data, temperature_data, humidity_data, heat_index_data
 
-def read_csv_data(csv_file):
-    timestamp_data = []
-    temperature_data = []
-    humidity_data = []
-    
-    with open(csv_file, "r") as file:
-        csv_reader = csv.reader(file)
-        next(csv_reader)  # Skip the header row
-        for row in csv_reader:
-            timestamp, temperature, humidity = row
-            timestamp_data.append(timestamp)
-            temperature_data.append(float(temperature))
-            humidity_data.append(float(humidity))
-    
-    return timestamp_data, temperature_data, humidity_data
-
-def plot_data(timestamp_data, temperature_data, humidity_data):
-    time = range(len(timestamp_data))
-    plt.plot(time, temperature_data, label='Temperature (Celsius)')
-    plt.plot(time, humidity_data, label='Humidity (%)')
-    plt.xlabel('Time (minutes)')
-    plt.ylabel('Sensor Value')
-    plt.legend()
-    plt.grid(True)
-    plt.title('Simulated Temperature and Humidity Sensor Data')
-    plt.show()
-
 def main():
     num_samples = 1440  # Simulate data for 24 hours (1 minute intervals)
-    initial_temp = 5.0
-    temp_variance = 0.4
-    initial_humidity = 21.0
-    humidity_variance = 0.2
+    initial_temp = 20.0 # Initial temperature
+    temp_variance = 0.2 # Temperature variance
+    initial_humidity = 21.0 # Initial humidity
+    humidity_variance = 0.2 # Humidity variance
     
+    # Create and assign the variable values
     timestamp_data, temperature_data, humidity_data, heat_index_data = simulate_sensor_data(num_samples, initial_temp, temp_variance, initial_humidity, humidity_variance)
     
     # Save the data to a CSV file
