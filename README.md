@@ -19,3 +19,11 @@ The project aims to achieve the following key objectives:
 Automation: Automate the process of data retrieval and upload. Create a scheduled task to periodically run scripts that fetch simulated data and upload it to the cloud.
   </li>
 </ol>
+
+<h3>Project Timeline</h3>
+<ol>
+  <li>Initial Setup: Create an AWS account and take advantage of the free usage tier for one year. Use a credit card for verification.</li>
+  <li>EC2 Instance: Create an Amazon EC2 instance to host the IoT gateway. The EC2 instance provides resizable computing capacity in the cloud.</li>
+  <li>InfluxDB Integration: Integrate InfluxDB 2.0 with the EC2 instance for efficient storage of IoT data.</li>
+  <li>SSH Access: Establish SSH access to the EC2 instance using the provided keypair.</li>
+</ol>
