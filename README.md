@@ -22,15 +22,15 @@ Automation: Automate the process of data retrieval and upload. Create a schedule
 
 <h3>Project Timeline</h3>
 <ol>
-  <li><b>Initial Setup</b> Created an AWS account and took advantage of the free usage tier for one year. Used a credit card for verification.</li>
-  <li><b>EC2 Instance</b> Created an AWS EC2 instance to host the IoT gateway. The EC2 instance provides resizable computing capacity in the cloud.</li>
-  <li><b>InfluxDB Integration</b> Integrated InfluxDB 2.0 with the EC2 instance for efficient storage of IoT data.</li>
-  <li><b>SSH Access</b> Established SSH access to the EC2 instance using the provided keypair.</li>
-  <li><b>Python Environment</b> Installed the Python interpreter and required Python modules on the EC2 instance..</li>
-  <li><b>Uploading Source Code</b> Created a directory on the EC2 instance to store the source code. Used SCP (Secure Copy Protocol) to import the Python source files to the EC2 instance.</li>
-  <li><b>Shell Script</b> Create a shell script that executes the Python scripts for data retrieval and upload.</li>
-  <li><b>Cron Job</b> Installed and configured cronie on the EC2 instance. Create a cron job to run the shell script daily to automate the data uploading process.</li>
-  <li><b>Dashboard Export</b> Export the generated data to a dashboard in JSON format for visualization and analysis.</li>
+  <li><b>Initial Setup:</b> Created an AWS account and took advantage of the free usage tier for one year. Used a credit card for verification.</li>
+  <li><b>EC2 Instance:</b> Created an AWS EC2 instance to host the IoT gateway. The EC2 instance provides resizable computing capacity in the cloud.</li>
+  <li><b>InfluxDB Integration:</b> Integrated InfluxDB 2.0 with the EC2 instance for efficient storage of IoT data.</li>
+  <li><b>SSH Access:</b> Established SSH access to the EC2 instance using the provided keypair.</li>
+  <li><b>Python Environment:</b> Installed the Python interpreter and required Python modules on the EC2 instance..</li>
+  <li><b>Uploading Source Code:</b> Created a directory on the EC2 instance to store the source code. Used SCP (Secure Copy Protocol) to import the Python source files to the EC2 instance.</li>
+  <li><b>Shell Script:</b> Create a shell script that executes the Python scripts for data retrieval and upload.</li>
+  <li><b>Cron Job:</b> Installed and configured cronie on the EC2 instance. Create a cron job to run the shell script daily to automate the data uploading process.</li>
+  <li><b>Dashboard Export:</b> Export the generated data to a dashboard in JSON format for visualization and analysis.</li>
 </ol>
 
 <h3>Conclusion</h3>
