@@ -20,7 +20,7 @@ Automation: Automate the process of data retrieval and upload. Create a schedule
   </li>
 </ol>
 
-<h3>Project Timeline</h3>
+<h3>Project Steps</h3>
 <ol>
   <li><b>Initial Setup:</b> Created an AWS account and took advantage of the free usage tier for one year. Used a credit card for verification.</li>
   <li><b>EC2 Instance:</b> Created an AWS EC2 instance to host the IoT gateway. The EC2 instance provides resizable computing capacity in the cloud.</li>
