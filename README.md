@@ -6,16 +6,16 @@ This project focuses on building an Internet of Things (IoT) system that include
 The project aims to achieve the following key objectives:
 <ol>
   <li>
-    <b>IoT Gateway</b> Create a robust IoT gateway that acts as an intermediary between IoT devices, such as sensors and smart devices, and the cloud-based platform or local network.
+    <b>IoT Gateway:</b> Create a robust IoT gateway that acts as an intermediary between IoT devices, such as sensors and smart devices, and the cloud-based platform or local network.
   </li>
   <li>
-    <b>Efficient Data Transmission</b> Utilize MQTT as the messaging protocol due to its lightweight and efficient nature. MQTT is well-suited for resource-constrained networks with limited bandwidth, making it ideal for IoT data transmission.
+    <b>Efficient Data Transmission:</b> Utilize MQTT as the messaging protocol due to its lightweight and efficient nature. MQTT is well-suited for resource-constrained networks with limited bandwidth, making it ideal for IoT data transmission.
   </li>
   <li>
-    <b>Reliability and Scalability</b> Implement MQTT's built-in features to ensure reliability, especially for IoT devices connected over unreliable networks. The protocol's scalability allows it to handle a large number of IoT devices.
+    <b>Reliability and Scalability:</b> Implement MQTT's built-in features to ensure reliability, especially for IoT devices connected over unreliable networks. The protocol's scalability allows it to handle a large number of IoT devices.
   </li>
   <li>
-    <b>Security</b> Leverage modern authentication protocols (e.g., OAuth, TLS1.3) supported by MQTT to ensure secure communication between devices and users.
+    <b>Security:</b> Leverage modern authentication protocols (e.g., OAuth, TLS1.3) supported by MQTT to ensure secure communication between devices and users.
 Automation: Automate the process of data retrieval and upload. Create a scheduled task to periodically run scripts that fetch simulated data and upload it to the cloud.
   </li>
 </ol>
