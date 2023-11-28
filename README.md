@@ -1,4 +1,4 @@
-<H1>IoT Gateway for Data Processing and Upload</H1>
+<H1>Temperature and Humidity Monitoring</H1>
 
 <h3>Project Overview</h3>
 This project focuses on building an Internet of Things (IoT) system that includes an IoT gateway for efficient communication, data processing, and management between IoT devices and a central cloud-based platform. The project utilizes Amazon Elastic Compute Cloud (Amazon EC2) instances for hosting the IoT gateway, and MQTT (Message Queuing Telemetry Transport) as the messaging protocol for machine-to-machine communication. The MQTT protocol follows a publish/subscribe model, and the project also emphasizes the benefits of this model for decoupling message senders from message receivers.
